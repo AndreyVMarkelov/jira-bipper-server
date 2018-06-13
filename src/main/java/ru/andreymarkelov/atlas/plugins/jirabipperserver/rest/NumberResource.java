@@ -12,15 +12,20 @@ import javax.ws.rs.core.Response;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.ContactManager;
 
 @Path("/phonenumbers")
 public class NumberResource {
     private static final Logger log = LoggerFactory.getLogger(NumberResource.class);
 
     private final JiraAuthenticationContext authenticationContext;
+    private final ContactManager contactManager;
 
-    public NumberResource(JiraAuthenticationContext authenticationContext) {
+    public NumberResource(
+            JiraAuthenticationContext authenticationContext,
+            ContactManager contactManager) {
         this.authenticationContext = authenticationContext;
+        this.contactManager = contactManager;
     }
 
     @GET
