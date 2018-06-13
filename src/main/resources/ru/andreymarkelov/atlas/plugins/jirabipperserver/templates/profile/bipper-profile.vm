@@ -1,1 +1,63 @@
-Hi All!
+$webResourceManager.requireResourcesForContext("jira-bipper-profile")
+<div id="bipper-user-profile-fragment" class="module">
+    <div class="mod-header">
+        <ul class="ops">
+            <li>
+                <a id="edit-bipper-profile-link" class="aui-button aui-button-subtle" href="#" title="Edit">
+                    <span class="aui-icon aui-icon-small aui-iconfont-edit">Edit</span>
+                </a>
+            </li>
+        </ul>
+        <h3>$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.profile.title")</h3>
+    </div>
+    <div class="mod-content">
+        <div id="bipper-action-dialog" class="aui-message info hidden">
+            <span class="aui-icon icon-info"></span>
+            $i18n.getText("notification.user.profile.updated")
+        </div>
+        <ul class="item-details">
+            <li>
+                <dl title='$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.profile.phone")'>
+                    <dt>$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.profile.phone"):</dt>
+                    <dd>
+                        <span id="up-bipper-phone"></span>
+                    </dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+</div>
+<section role="dialog" id="bipper-user-profile-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+    <form action="UpdateUserPreferences.jspa" class="aui" id="update-user-preferences" method="post">
+        <header class="aui-dialog2-header">
+            <h2 class="aui-dialog2-header-main">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.profile.title")</h2>
+            <a class="aui-dialog2-header-close">
+                <span class="aui-icon aui-icon-small aui-iconfont-close-dialog">
+                    $i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.profile.close")
+                </span>
+            </a>
+        </header>
+        <div class="aui-dialog2-content">
+            <div class="form-body" style="max-height: 193px;">
+                <fieldset>
+                    <legend><span>User details</span></legend>
+                    <div class="field-group">
+                        <label for="bipper-user-profile-phone">
+                            $i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.profile.phone")
+                            <span class="aui-icon icon-required"> required</span>
+                        </label>
+                        <input class="text" id="bipper-user-profile-phone" maxlength="255" name="bipper-user-profile-phone" type="text"/>
+                        <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.profile.phone")</div>
+                        <div class="error" id="error"></div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <footer class="aui-dialog2-footer">
+            <div class="aui-dialog2-footer-actions">
+                <button id="bipper-dialog-save" class="aui-button">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.profile.save")</button>
+                <button id="bipper-dialog-close" class="aui-button aui-button-link">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.profile.close")</button>
+            </div>
+        </footer>
+    </form>
+</section>
