@@ -9,11 +9,11 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <organization>
-        <name>Example Company</name>
-        <url>http://www.example.com/</url>
+        <name>Andrey Markelov</name>
+        <url>http://ru.linkedin.com/in/andreymarkelov/</url>
     </organization>
 
-    <name>jira-bipper-server</name>
+    <name>Beeper – Multi-Channel Notifications</name>
     <description>This is the ru.andreymarkelov.atlas.plugins:jira-bipper-server plugin for Atlassian JIRA.</description>
     <packaging>atlassian-plugin</packaging>
 

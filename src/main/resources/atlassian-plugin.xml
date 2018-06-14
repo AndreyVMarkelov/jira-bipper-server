@@ -84,7 +84,7 @@
     <!-- Web Actions -->
     <webwork1 key="bipper-actions" name="Jira Bipper Web Actions" class="java.lang.Object">
         <actions>
-            <action name="ru.andreymarkelov.atlas.plugins.jirabipperserver.action.admin.BipperSettingsViewAction" alias="BipperSettingsViewAction">
+            <action name="ru.andreymarkelov.atlas.plugins.jirabipperserver.action.admin.BeeperSettingsViewAction" alias="BipperSettingsViewAction">
                 <view name="input">/ru/andreymarkelov/atlas/plugins/jirabipperserver/templates/admin/settings-view.vm</view>
                 <view name="error">/ru/andreymarkelov/atlas/plugins/jirabipperserver/templates/admin/settings-view.vm</view>
                 <view name="success">/ru/andreymarkelov/atlas/plugins/jirabipperserver/templates/admin/settings-view.vm</view>
