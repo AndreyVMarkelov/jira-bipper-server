@@ -7,12 +7,12 @@ import net.java.ao.schema.Indexed;
 @Preload
 public interface ContantAO extends Entity {
     @Indexed
-    Long getName();
-    void setName(String name);
+    String getKey();
+    void setKey(String key);
 
     @Indexed
-    Long getEmail();
-    void setEmail(String email);
+    String getName();
+    void setName(String name);
 
     String getPhone();
     void setPhone(String phone);

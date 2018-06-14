@@ -13,9 +13,9 @@ $webResourceManager.requireResourcesForContext("jira-bipper-profile")
     <div class="mod-content">
         <div id="bipper-action-dialog" class="aui-message info hidden">
             <span class="aui-icon icon-info"></span>
-            $i18n.getText("notification.user.profile.updated")
+            $i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.profile.updated")
         </div>
-        <input type="hidden" id="up-bipper-name" name="up-bipper-name" value="${currentUser.getName()}">
+        <input type="hidden" id="up-bipper-key" name="up-bipper-key" value="${currentUser.getKey()}">
         <ul class="item-details">
             <li>
                 <dl title='$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.profile.phone")'>
@@ -40,14 +40,13 @@ $webResourceManager.requireResourcesForContext("jira-bipper-profile")
             <div class="aui-dialog2-content">
                 <div class="form-body" style="max-height: 193px;">
                     <fieldset>
-                        <legend><span>User details</span></legend>
                         <div class="field-group">
                             <label for="bipper-user-profile-phone">
                                 $i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.profile.phone")
                                 <span class="aui-icon icon-required"> required</span>
                             </label>
-                            <input class="text" id="bipper-user-profile-phone" maxlength="255" name="bipper-user-profile-phone" type="text"/>
-                            <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.profile.phone")</div>
+                            <input class="text" id="up-bipper-new-phone" maxlength="255" name="up-bipper-new-phone" type="text"/>
+                            <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.profile.phone.desc")</div>
                             <div class="error" id="error"></div>
                         </div>
                     </fieldset>

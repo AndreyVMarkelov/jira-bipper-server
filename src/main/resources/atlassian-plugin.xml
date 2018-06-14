@@ -66,28 +66,28 @@
 
     <!-- Web Items -->
     <web-section key="bipper-admin-section" name="Jira Bipper Admin Section" location="admin_plugins_menu">
-        <label key="ru.andreymarkelov.atlas.plugins.buzzimport.section"/>
-        <tooltip key="ru.andreymarkelov.atlas.plugins.buzzimport.section.tooltip"/>
+        <label key="ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.section"/>
+        <tooltip key="ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.section.tooltip"/>
         <conditions type="AND">
             <condition class="com.atlassian.jira.plugin.webfragment.conditions.IsAdminCondition"/>
         </conditions>
     </web-section>
-    <web-item key="bipper-admin-view-action" name="Import Issues" section="admin_plugins_menu/bipper-admin-section" weight="200">
-        <label key="ru.andreymarkelov.atlas.plugins.buzzimport.webitem.import">Import Issues</label>
-        <description key="ru.andreymarkelov.atlas.plugins.buzzimport.webitem.import.desc">On this page you can import issue via Excel with custom settings.</description>
+    <web-item key="bipper-admin-settings-link" name="Jira Bipper Settings" section="admin_plugins_menu/bipper-admin-section" weight="200">
+        <label key="ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.settings.link"/>
+        <description key="ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.settings.link.desc"/>
         <condition class="com.atlassian.jira.plugin.webfragment.conditions.JiraGlobalPermissionCondition">
             <param name="permission">admin</param>
         </condition>
-        <link linkId="bipper-admin-view-action">/secure/BipperSettingsViewAction!default.jspa</link>
+        <link linkId="bipper-admin-settings-link">/secure/BipperSettingsViewAction!default.jspa</link>
     </web-item>
 
     <!-- Web Actions -->
-    <webwork1 key="buzzimport-actions" name="Buzz Import Web Actions" class="java.lang.Object">
+    <webwork1 key="bipper-actions" name="Jira Bipper Web Actions" class="java.lang.Object">
         <actions>
             <action name="ru.andreymarkelov.atlas.plugins.jirabipperserver.action.admin.BipperSettingsViewAction" alias="BipperSettingsViewAction">
-                <view name="input">/ru/andreymarkelov/atlas/plugins/buzzimport/templates/actions/admin/input.vm</view>
-                <view name="error">/ru/andreymarkelov/atlas/plugins/buzzimport/templates/actions/admin/input.vm</view>
-                <view name="success">/ru/andreymarkelov/atlas/plugins/buzzimport/templates/actions/admin/success.vm</view>
+                <view name="input">/ru/andreymarkelov/atlas/plugins/jirabipperserver/templates/admin/settings-view.vm</view>
+                <view name="error">/ru/andreymarkelov/atlas/plugins/jirabipperserver/templates/admin/settings-view.vm</view>
+                <view name="success">/ru/andreymarkelov/atlas/plugins/jirabipperserver/templates/admin/settings-view.vm</view>
                 <view name="permissionviolation">/secure/views/permissionviolation.jsp</view>
             </action>
         </actions>

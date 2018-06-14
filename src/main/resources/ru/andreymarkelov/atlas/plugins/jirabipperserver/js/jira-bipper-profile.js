@@ -1,19 +1,22 @@
 AJS.toInit(function () {
     function updatePhone() {
-        alert(AJS.$("#up-bipper-name").val());
         AJS.$.ajax({
-            url: AJS.contextPath() + "/rest/bipper/1.0/phonenumbers" +  "?userName=" + AJS.$("#up-bipper-name").val(),
-            type: "POST",
+            url: AJS.contextPath() + "/rest/bipper/1.0/phonenumbers",
+            type: "PUT",
+            dataType : "json",
             contentType: "application/json",
-            data: "\"" + AJS.$("#update-notification-preferences-phone").val() + "\"",
-            processData: false
-        }).done(function (config) {
-            if (config.message) {
-                AJS.$("#error").text(config.message);
-                AJS.$("#error").show();
-            } else {
-                AJS.$("#up-bipper-phone").text(config.number);
+            data: JSON.stringify({key: AJS.$("#up-bipper-key").val(), phone: AJS.$("#up-bipper-new-phone").val()}),
+            processData: false,
+            success: function () {
+                AJS.$("#up-bipper-phone").text(AJS.$("#up-bipper-new-phone").val());
                 AJS.dialog2("#bipper-user-profile-dialog").hide();
+                AJS.$("#bipper-action-dialog").removeClass("hidden");
+            },
+            error: function (error) {
+                if (error.responseText) {
+                    AJS.$("#error").text(error.responseText);
+                    AJS.$("#error").show();
+                }
             }
         });
     }
@@ -30,6 +33,8 @@ AJS.toInit(function () {
 
     AJS.$("#edit-bipper-profile-link").click(function(e) {
         e.preventDefault();
+        AJS.$("#up-bipper-new-phone").val(AJS.$("#up-bipper-phone").text());
+        AJS.$("#error").text("");
         AJS.dialog2("#bipper-user-profile-dialog").show();
     });
 });

@@ -8,13 +8,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "phonenumber")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class PhoneNumberModel {
-    @XmlElement(name = "phone")
+    @XmlElement(name = "key")
+    private String key;
+
+    @XmlElement(name = "name")
+    private String name;
+
+    @XmlElement(name = "phone", nillable = true)
     private String phone;
 
     protected PhoneNumberModel() {
     }
 
-    public PhoneNumberModel(String phone) {
+    public PhoneNumberModel(String key, String name, String phone) {
+        this.key = key;
+        this.name = name;
         this.phone = phone;
     }
 
@@ -26,10 +34,28 @@ public class PhoneNumberModel {
         this.phone = phone;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
     @Override
     public String toString() {
         return "PhoneNumberModel{" +
-                "phone='" + phone + '\'' +
+                "key='" + key + '\'' +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
                 '}';
     }
 }
