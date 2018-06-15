@@ -11,19 +11,19 @@
 
     <!-- I18N -->
     <resource type="i18n" name="i18n" location="ru.andreymarkelov.atlas.plugins.jirabipperserver.i18n.jira-bipper-server"/>
-    
+
     <!-- Web Resources -->
-    <web-resource key="jira-bipper-server-resources" name="Jira Bipper Web Resources">
+    <web-resource key="jira-bipper-server-admin-resources" name="Jira Bipper Admin Web Resources">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
-        <resource type="download" name="jira-bipper-server.css" location="/css/jira-bipper-server.css"/>
-        <resource type="download" name="jira-bipper-server.js" location="/js/jira-bipper-server.js"/>
-        <resource type="download" name="images/" location="/images"/>
-        <context>jira-bipper-server</context>
+        <dependency>com.atlassian.auiplugin:aui-page-layout</dependency>
+        <dependency>com.atlassian.auiplugin:dialog2</dependency>
+        <resource type="download" name="jira-bipper-admin.js" location="/ru/andreymarkelov/atlas/plugins/jirabipperserver/js/jira-bipper-admin.js"/>
+        <context>jira-bipper-admin</context>
     </web-resource>
-    <web-resource key="jira-bipper-server-pprofile-resources" name="Jira Bipper Profile Resources">
+    <web-resource key="jira-bipper-server-profile-resources" name="Jira Bipper Profile Web Resources">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
         <dependency>com.atlassian.auiplugin:dialog2</dependency>
-        <resource name="notification.js" type="download" location="/ru/andreymarkelov/atlas/plugins/jirabipperserver/js/jira-bipper-profile.js"/>
+        <resource name="jira-bipper-profile.js" type="download" location="/ru/andreymarkelov/atlas/plugins/jirabipperserver/js/jira-bipper-profile.js"/>
         <context>jira-bipper-profile</context>
     </web-resource>
 

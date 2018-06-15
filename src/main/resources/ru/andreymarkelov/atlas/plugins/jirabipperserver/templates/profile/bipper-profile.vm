@@ -41,7 +41,7 @@ $webResourceManager.requireResourcesForContext("jira-bipper-profile")
                 <div class="form-body" style="max-height: 193px;">
                     <fieldset>
                         <div class="field-group">
-                            <label for="bipper-user-profile-phone">
+                            <label for="up-bipper-new-phone">
                                 $i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.profile.phone")
                                 <span class="aui-icon icon-required"> required</span>
                             </label>

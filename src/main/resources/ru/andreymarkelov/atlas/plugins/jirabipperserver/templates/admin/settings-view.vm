@@ -1,1 +1,134 @@
-Settings view
+<html>
+<head>
+    <title>$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.title")</title>
+    <meta content="admin" name="decorator"/>
+    <meta content="admin_plugins_menu/bipper-admin-section" name="admin.active.section">
+    <meta content="bipper-admin-settings-link" name="admin.active.tab">
+    $webResourceManager.requireResource("jira.webresources:global-static")
+    $webResourceManager.requireResource("jira.webresources:jira-global")
+    $webResourceManager.requireResource("com.atlassian.auiplugin:ajs")
+    $webResourceManager.requireResourcesForContext("jira-bipper-admin")
+</head>
+<body class="aui">
+<section id="content" role="main">
+    <header class="aui-page-header">
+        <div class="aui-page-header-inner">
+            <div class="aui-page-header-main">
+                <h2>$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.title")</h2>
+            </div>
+            <div class="aui-page-header-actions">
+                <div class="aui-buttons">
+                    <a id="edit-bipper-admin-link" class="aui-button" href="#" title="Edit">
+                        <span class="aui-icon aui-icon-small aui-iconfont-edit"></span>
+                        $i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.edit")
+                    </a>
+                </div>
+                <a class="help-lnk" href="https://docs.atlassian.com/jira/jadm-docs-077/Defining+issue+type+field+values" title="Get online help about Defining issue type field values" data-helplink="online" target="_jirahelp">
+                    <span class="aui-icon aui-icon-small aui-iconfont-help">Get help!</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="module">
+        <div class="mod-content">
+            <div id="setup-info" class="aui-message info">
+                <span class="aui-icon icon-info"></span>
+                <p class="title"><strong>$action.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.info")</strong></p>
+                <p>$action.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.info.descr")</p>
+            </div>
+        </div>
+    </div>
+    <div class="aui-page-panel">
+        <div class="aui-page-panel-inner">
+            <section class="aui-page-panel-content">
+                #if ($saved)
+                    <div class="aui-message closeable shadowed">
+                        <p class="title">
+                            <span class="aui-icon icon-success"></span>
+                            <strong>$action.getText("ru.andreymarkelov.atlas.plugins.promjiraexporter.settings.status.success")</strong>
+                        </p>
+                    </div>
+                #end
+                <div id="base-form">
+                    <form class="aui" name="jiraform" method="post" action="#">
+                        <input type="hidden" name="atl_token" value="$atl_token"/>
+                        <div class="field-group">
+                            <label for="token">$action.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.sendername"):</label>
+                            <div class="field-value">wdwed</div>
+                            <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.sendername.desc")</div>
+                        </div>
+                        <div class="field-group">
+                            <label for="delay">$action.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.apikey"):</label>
+                            <div class="field-value">wdwed</div>
+                            <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.apikey.desc")</div>
+                        </div>
+                        <div class="field-group">
+                            <label for="delay">$action.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.generatetime"):</label>
+                            <div class="field-value">wdwed</div>
+                            <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.generatetime.desc")</div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+<section role="dialog" id="bipper-user-admin-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+    <form action="#" class="aui" id="update-infobip-account" method="post">
+        <header class="aui-dialog2-header">
+            <h2 class="aui-dialog2-header-main">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.setup")</h2>
+            <a class="aui-dialog2-header-close">
+                <span class="aui-icon aui-icon-small aui-iconfont-close-dialog">
+                    $i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.close")
+                </span>
+            </a>
+        </header>
+        <div class="aui-dialog2-content">
+            <div class="aui-message info">
+                <p class="title">
+                    <span class="aui-icon icon-info"></span>
+                    $action.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.setup.info")
+                </p>
+            </div>
+            <div class="form-body" style="max-height: 193px;">
+                <fieldset>
+                    <div class="field-group">
+                        <label for="up-bipper-sendername">
+                            $i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.sendername")
+                            <span class="aui-icon icon-required"> required</span>
+                        </label>
+                        <input class="text" id="up-bipper-sendername" maxlength="255" name="up-bipper-sendername" type="text"/>
+                        <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.sendername.desc")</div>
+                        <div class="error" id="accountId-error"></div>
+                    </div>
+                    <div class="field-group">
+                        <label for="up-bipper-accountid">
+                            $i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.accountid")
+                            <span class="aui-icon icon-required"> required</span>
+                        </label>
+                        <input class="text" id="up-bipper-accountid" maxlength="255" name="up-bipper-accountid" type="text"/>
+                        <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.accountid.desc")</div>
+                        <div class="error" id="accountid-error"></div>
+                    </div>
+                    <div class="field-group">
+                        <label for="up-bipper-accountpass">
+                            $i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.accountpass")
+                            <span class="aui-icon icon-required"> required</span>
+                        </label>
+                        <input class="password" id="up-bipper-accountpass" maxlength="255" name="up-bipper-accountpass" type="password"/>
+                        <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.accountpass.desc")</div>
+                        <div class="error" id="accountpass-error"></div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <footer class="aui-dialog2-footer">
+            <div class="aui-dialog2-footer-actions">
+                <button id="bipper-dialog-save" class="aui-button">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.save")</button>
+                <button id="bipper-dialog-close" class="aui-button aui-button-link">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.close")</button>
+            </div>
+        </footer>
+    </form>
+</section>
+</body>
+</html>
