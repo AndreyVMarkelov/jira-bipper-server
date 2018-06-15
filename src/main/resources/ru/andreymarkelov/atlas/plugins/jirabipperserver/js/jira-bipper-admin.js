@@ -1,4 +1,12 @@
 AJS.toInit(function () {
+    function updateAccountSetup() {
+        alert("1");
+    }
+
+    AJS.$("#bipper-dialog-save").click(function (e) {
+        e.preventDefault();
+        updateAccountSetup();
+    });
 
     AJS.$("#bipper-dialog-close").click(function (e) {
         e.preventDefault();

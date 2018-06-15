@@ -72,7 +72,7 @@ public class NumberResource {
                         .build();
             }
 
-            return Response.ok(new PhoneNumberModel(user.getKey(), user.getName(), contactManager.getPhoneByKey(key))).build();
+            return Response.ok(new PhoneNumberReqRespModel(user.getKey(), user.getName(), contactManager.getPhoneByKey(key))).build();
         } else if (isNotBlank(name)) {
             ApplicationUser user = userManager.getUserByName(name);
             if (user == null) {
@@ -88,7 +88,7 @@ public class NumberResource {
                         .build();
             }
 
-            return Response.ok(new PhoneNumberModel(user.getKey(), user.getName(), contactManager.getPhoneByName(name))).build();
+            return Response.ok(new PhoneNumberReqRespModel(user.getKey(), user.getName(), contactManager.getPhoneByName(name))).build();
         } else {
             return status(BAD_REQUEST)
                     .entity(authenticationContext.getI18nHelper().getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.rest.nouserkeyorname"))
@@ -98,7 +98,7 @@ public class NumberResource {
 
     @PUT
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response storePhoneForUser(PhoneNumberModel model) {
+    public Response storePhoneForUser(PhoneNumberReqRespModel model) {
         ApplicationUser currentUser = authenticationContext.getLoggedInUser();
         if (currentUser == null) {
             return status(UNAUTHORIZED)

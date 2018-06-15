@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "phonenumber")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class PhoneNumberModel {
+public class PhoneNumberReqRespModel {
     @XmlElement(name = "key")
     private String key;
 
@@ -17,10 +17,10 @@ public class PhoneNumberModel {
     @XmlElement(name = "phone", nillable = true)
     private String phone;
 
-    protected PhoneNumberModel() {
+    protected PhoneNumberReqRespModel() {
     }
 
-    public PhoneNumberModel(String key, String name, String phone) {
+    public PhoneNumberReqRespModel(String key, String name, String phone) {
         this.key = key;
         this.name = name;
         this.phone = phone;
@@ -52,7 +52,7 @@ public class PhoneNumberModel {
 
     @Override
     public String toString() {
-        return "PhoneNumberModel{" +
+        return "PhoneNumberReqRespModel{" +
                 "key='" + key + '\'' +
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +

@@ -45,6 +45,9 @@
     <component key="bipper-events-settings-manager" name="Jira Bipper Events Manager" class="ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.impl.EventsManagerImpl">
         <interface>ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.EventsManager</interface>
     </component>
+    <component key="bipper-sender-service" name="Jira Bipper Sender Service" class="ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.impl.SenderServiceImpl">
+        <interface>ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.SenderService</interface>
+    </component>
     <component key="tx-processor" name="Transactional Annotation Processor" class="com.atlassian.activeobjects.external.TransactionalAnnotationProcessor"/>
 
     <!-- Component Imports -->
