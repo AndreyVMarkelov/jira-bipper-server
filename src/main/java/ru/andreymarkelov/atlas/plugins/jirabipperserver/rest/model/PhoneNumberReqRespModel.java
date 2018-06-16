@@ -1,4 +1,4 @@
-package ru.andreymarkelov.atlas.plugins.jirabipperserver.rest;
+package ru.andreymarkelov.atlas.plugins.jirabipperserver.rest.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

@@ -14,6 +14,10 @@ public class BeeperSettingsViewAction extends JiraWebActionSupport {
 
     private final AuthManager authManager;
 
+    private String senderName;
+    private String apiKey;
+    private Long generationTime;
+
     public BeeperSettingsViewAction(AuthManager authManager) {
         this.authManager = authManager;
     }
@@ -23,7 +27,9 @@ public class BeeperSettingsViewAction extends JiraWebActionSupport {
         if (!hasAdminPermission()) {
             return PERMISSION_VIOLATION_RESULT;
         }
-
+        senderName = authManager.getSenderName();
+        apiKey = authManager.getApiKey();
+        generationTime = authManager.getGenerationTime();
         return INPUT;
     }
 
@@ -31,5 +37,17 @@ public class BeeperSettingsViewAction extends JiraWebActionSupport {
         return ofNullable(getLoggedInUser())
                 .map(x -> getGlobalPermissionManager().hasPermission(ADMINISTER, x))
                 .orElse(false);
+    }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public Long getGenerationTime() {
+        return generationTime;
     }
 }

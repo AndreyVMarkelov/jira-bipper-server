@@ -15,6 +15,7 @@ import com.atlassian.jira.user.util.UserManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.ContactManager;
+import ru.andreymarkelov.atlas.plugins.jirabipperserver.rest.model.PhoneNumberReqRespModel;
 
 import static com.atlassian.jira.permission.GlobalPermissionKey.ADMINISTER;
 import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
@@ -65,7 +66,7 @@ public class NumberResource {
                         .build();
             }
 
-            if  (!globalPermissionManager.hasPermission(ADMINISTER, currentUser) && !currentUser.equals(user)) {
+            if (!globalPermissionManager.hasPermission(ADMINISTER, currentUser) && !currentUser.equals(user)) {
                 log.warn("Invalid user:{} tries to access phone number", currentUser.getName());
                 return status(FORBIDDEN)
                         .entity(authenticationContext.getI18nHelper().getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.rest.notgranted"))
@@ -81,7 +82,7 @@ public class NumberResource {
                         .build();
             }
 
-            if  (!globalPermissionManager.hasPermission(ADMINISTER, currentUser) && !currentUser.equals(user)) {
+            if (!globalPermissionManager.hasPermission(ADMINISTER, currentUser) && !currentUser.equals(user)) {
                 log.warn("Invalid user:{} tries to access phone number", currentUser.getName());
                 return status(FORBIDDEN)
                         .entity(authenticationContext.getI18nHelper().getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.rest.notgranted"))
@@ -120,7 +121,7 @@ public class NumberResource {
                         .build();
             }
 
-            if  (!globalPermissionManager.hasPermission(ADMINISTER, currentUser) && !currentUser.equals(user)) {
+            if (!globalPermissionManager.hasPermission(ADMINISTER, currentUser) && !currentUser.equals(user)) {
                 log.warn("Invalid user:{} tries to access phone number", currentUser.getName());
                 return status(FORBIDDEN)
                         .entity(authenticationContext.getI18nHelper().getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.rest.notgranted"))
@@ -136,7 +137,7 @@ public class NumberResource {
                         .build();
             }
 
-            if  (!globalPermissionManager.hasPermission(ADMINISTER, currentUser) && !currentUser.equals(user)) {
+            if (!globalPermissionManager.hasPermission(ADMINISTER, currentUser) && !currentUser.equals(user)) {
                 log.warn("Invalid user:{} tries to access phone number", currentUser.getName());
                 return status(FORBIDDEN)
                         .entity(authenticationContext.getI18nHelper().getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.rest.notgranted"))

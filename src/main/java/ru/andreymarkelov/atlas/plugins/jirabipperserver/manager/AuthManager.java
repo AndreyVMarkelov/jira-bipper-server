@@ -6,4 +6,7 @@ public interface AuthManager {
 
     String getApiKey();
     void setApiKey(String apiKey);
+
+    Long getGenerationTime();
+    void setGenerationTime(Long generationTime);
 }
