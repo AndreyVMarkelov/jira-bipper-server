@@ -58,19 +58,21 @@
                         <input type="hidden" name="atl_token" value="$atl_token"/>
                         <div class="field-group">
                             <label for="token">$action.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.sendername"):</label>
-                            <div class="field-value">wdwed</div>
+                            <div class="field-value" id="senderName-value">$!{senderName}</div>
                             <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.sendername.desc")</div>
                         </div>
                         <div class="field-group">
                             <label for="delay">$action.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.apikey"):</label>
-                            <div class="field-value">wdwed</div>
+                            <div class="field-value" id="apiKey-value">$!{apiKey}</div>
                             <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.apikey.desc")</div>
                         </div>
-                        <div class="field-group">
+                        #if ($generationTime)
+                        <div class="field-group" id="generationTime-block">
                             <label for="delay">$action.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.generatetime"):</label>
-                            <div class="field-value">wdwed</div>
+                            <div class="field-value">${generationTime}</div>
                             <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.generatetime.desc")</div>
                         </div>
+                        #end
                     </form>
                 </div>
             </section>
@@ -143,7 +145,7 @@
                             $i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.sendername")
                             <span class="aui-icon icon-required"> required</span>
                         </label>
-                        <input class="text" id="up-bipper-sendername" maxlength="255" name="up-bipper-sendername" type="text"/>
+                        <input class="text" id="up-bipper-generate-sendername" maxlength="255" name="up-bipper-sendername" type="text"/>
                         <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.sendername.desc")</div>
                         <div class="error" id="accountId-error"></div>
                     </div>
@@ -152,7 +154,7 @@
                             $i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.accountid")
                             <span class="aui-icon icon-required"> required</span>
                         </label>
-                        <input class="text" id="up-bipper-accountid" maxlength="255" name="up-bipper-accountid" type="text"/>
+                        <input class="text" id="up-bipper-generate-accountid" maxlength="255" name="up-bipper-accountid" type="text"/>
                         <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.accountid.desc")</div>
                         <div class="error" id="accountid-error"></div>
                     </div>
@@ -161,7 +163,7 @@
                             $i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.accountpass")
                             <span class="aui-icon icon-required"> required</span>
                         </label>
-                        <input class="password" id="up-bipper-accountpass" maxlength="255" name="up-bipper-accountpass" type="password"/>
+                        <input class="password" id="up-bipper-generate-accountpass" maxlength="255" name="up-bipper-accountpass" type="password"/>
                         <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.accountpass.desc")</div>
                         <div class="error" id="accountpass-error"></div>
                     </div>
