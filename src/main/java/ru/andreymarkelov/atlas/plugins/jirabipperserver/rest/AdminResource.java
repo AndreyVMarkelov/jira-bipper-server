@@ -51,30 +51,26 @@ public class AdminResource {
         if (!globalPermissionManager.hasPermission(ADMINISTER, currentUser)) {
             log.warn("Invalid user:{} tries to access phone number", currentUser.getName());
             return status(FORBIDDEN)
-                    .entity(authenticationContext.getI18nHelper().getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.rest.notgranted"))
+                    .entity(authenticationContext.getI18nHelper().getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.rest.admin.notgranted"))
                     .build();
         }
 
-        if (isBlank(model.getSender())) {
+        if (isBlank(model.getSender()) || isBlank(model.getAccountId()) || isBlank(model.getPassword())) {
             return status(BAD_REQUEST)
-                    .entity(authenticationContext.getI18nHelper().getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.rest.notgranted"))
-                    .build();
-        }
-        if (isBlank(model.getAccountId())) {
-            return status(BAD_REQUEST)
-                    .entity(authenticationContext.getI18nHelper().getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.rest.notgranted"))
+                    .entity(authenticationContext.getI18nHelper().getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.rest.admin.nosenderandcreds"))
                     .build();
         }
 
         try {
             String apiKey = senderService.generateApiKey(model.getAccountId(), model.getPassword());
+            Long generationTime = System.currentTimeMillis();
             authManager.setSenderName(model.getSender());
             authManager.setApiKey(apiKey);
-            authManager.setGenerationTime(System.currentTimeMillis());
-            return status(OK).entity(new AccountSetupKeyReqRespModel(model.getSender(), apiKey)).build();
+            authManager.setGenerationTime(generationTime);
+            return status(OK).entity(new AccountSetupKeyReqRespModel(model.getSender(), apiKey, generationTime)).build();
         } catch (Exception e) {
             return status(BAD_REQUEST)
-                    .entity(authenticationContext.getI18nHelper().getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.rest.notgranted", e.getMessage()))
+                    .entity(authenticationContext.getI18nHelper().getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.rest.admin.generatekey", e.getMessage()))
                     .build();
         }
     }
@@ -87,18 +83,13 @@ public class AdminResource {
         if (!globalPermissionManager.hasPermission(ADMINISTER, currentUser)) {
             log.warn("Invalid user:{} tries to access phone number", currentUser.getName());
             return status(FORBIDDEN)
-                    .entity(authenticationContext.getI18nHelper().getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.rest.notgranted"))
+                    .entity(authenticationContext.getI18nHelper().getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.rest.admin.notgranted"))
                     .build();
         }
 
-        if (isBlank(model.getSender())) {
+        if (isBlank(model.getSender()) || isBlank(model.getApiKey())) {
             return status(BAD_REQUEST)
-                    .entity(authenticationContext.getI18nHelper().getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.rest.notgranted"))
-                    .build();
-        }
-        if (isBlank(model.getApiKey())) {
-            return status(BAD_REQUEST)
-                    .entity(authenticationContext.getI18nHelper().getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.rest.notgranted"))
+                    .entity(authenticationContext.getI18nHelper().getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.rest.admin.nosenderandapikey"))
                     .build();
         }
 

@@ -14,12 +14,16 @@ public class AccountSetupKeyReqRespModel {
     @XmlElement(name = "apiKey")
     private String apiKey;
 
+    @XmlElement(name = "generationTime")
+    private Long generationTime;
+
     protected AccountSetupKeyReqRespModel() {
     }
 
-    public AccountSetupKeyReqRespModel(String sender, String apiKey) {
+    public AccountSetupKeyReqRespModel(String sender, String apiKey, Long generationTime) {
         this.sender = sender;
         this.apiKey = apiKey;
+        this.generationTime = generationTime;
     }
 
     public String getSender() {
@@ -38,11 +42,20 @@ public class AccountSetupKeyReqRespModel {
         this.apiKey = apiKey;
     }
 
+    public Long getGenerationTime() {
+        return generationTime;
+    }
+
+    public void setGenerationTime(Long generationTime) {
+        this.generationTime = generationTime;
+    }
+
     @Override
     public String toString() {
         return "AccountSetupKeyReqRespModel{" +
                 "sender='" + sender + '\'' +
                 ", apiKey='" + apiKey + '\'' +
+                ", generationTime=" + generationTime +
                 '}';
     }
 }

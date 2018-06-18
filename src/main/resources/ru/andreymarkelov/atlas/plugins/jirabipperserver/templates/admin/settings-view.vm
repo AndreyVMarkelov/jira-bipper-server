@@ -68,8 +68,8 @@
                         </div>
                         #if ($generationTime)
                         <div class="field-group" id="generationTime-block">
-                            <label for="delay">$action.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.generatetime"):</label>
-                            <div class="field-value">${generationTime}</div>
+                            <label for="generationTime-value">$action.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.generatetime"):</label>
+                            <div class="field-value" id="generationTime-value">${generationTime}</div>
                             <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.generatetime.desc")</div>
                         </div>
                         #end
@@ -90,6 +90,7 @@
             </a>
         </header>
         <div class="aui-dialog2-content">
+            <div class="aui-message aui-message-error hidden" class="aui-message aui-message-error" id="setup-error"></div>
             <div class="form-body" style="max-height: 193px;">
                 <fieldset>
                     <div class="field-group">
@@ -99,7 +100,6 @@
                         </label>
                         <input class="text" id="up-bipper-setup-sendername" maxlength="255" name="up-bipper-setup-sendername" type="text"/>
                         <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.editkey.sendername.desc")</div>
-                        <div class="error" id="setup-sendername-error"></div>
                     </div>
                     <div class="field-group">
                         <label for="up-bipper-setup-apikey">
@@ -108,7 +108,6 @@
                         </label>
                         <input class="text" id="up-bipper-setup-apikey" maxlength="255" name="up-bipper-setup-apikey" type="text"/>
                         <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.editkey.apikey.desc")</div>
-                        <div class="error" id="setup-apikey-error"></div>
                     </div>
                 </fieldset>
             </div>
@@ -135,37 +134,35 @@
             <div class="aui-message info">
                 <p class="title">
                     <span class="aui-icon icon-info"></span>
-                    $action.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.setup.info")
+                    $action.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.generatekey.info")
                 </p>
             </div>
+            <div class="aui-message aui-message-error hidden" class="aui-message aui-message-error" id="generate-error"></div>
             <div class="form-body" style="max-height: 193px;">
                 <fieldset>
                     <div class="field-group">
                         <label for="up-bipper-sendername">
-                            $i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.sendername")
+                            $i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.generatekey.sendername")
                             <span class="aui-icon icon-required"> required</span>
                         </label>
                         <input class="text" id="up-bipper-generate-sendername" maxlength="255" name="up-bipper-sendername" type="text"/>
-                        <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.sendername.desc")</div>
-                        <div class="error" id="accountId-error"></div>
+                        <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.generatekey.sendername.desc")</div>
                     </div>
                     <div class="field-group">
                         <label for="up-bipper-accountid">
-                            $i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.accountid")
+                            $i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.generatekey.accountid")
                             <span class="aui-icon icon-required"> required</span>
                         </label>
                         <input class="text" id="up-bipper-generate-accountid" maxlength="255" name="up-bipper-accountid" type="text"/>
-                        <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.accountid.desc")</div>
-                        <div class="error" id="accountid-error"></div>
+                        <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.generatekey.accountid.desc")</div>
                     </div>
                     <div class="field-group">
                         <label for="up-bipper-accountpass">
-                            $i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.accountpass")
+                            $i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.generatekey.accountpass")
                             <span class="aui-icon icon-required"> required</span>
                         </label>
                         <input class="password" id="up-bipper-generate-accountpass" maxlength="255" name="up-bipper-accountpass" type="password"/>
-                        <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.accountpass.desc")</div>
-                        <div class="error" id="accountpass-error"></div>
+                        <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.generatekey.accountpass.desc")</div>
                     </div>
                 </fieldset>
             </div>

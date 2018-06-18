@@ -11,13 +11,13 @@ AJS.toInit(function () {
                 AJS.dialog2("#bipper-admin-setup-dialog").hide();
                 AJS.$("#senderName-value").text(AJS.$("#up-bipper-setup-sendername").val());
                 AJS.$("#apiKey-value").text(AJS.$("#up-bipper-setup-apikey").val());
+                AJS.$("#generationTime-value").text("");
                 AJS.$("#generationTime-block").hide();
-//                AJS.$("#bipper-admin-setup-dialog").removeClass("hidden");
             },
             error: function (error) {
                 if (error.responseText) {
-                    AJS.$("#error").text(error.responseText);
-                    AJS.$("#error").show();
+                    AJS.$("#setup-error").text(error.responseText);
+                    AJS.$("#setup-error").removeClass("hidden");
                 }
             }
         });
@@ -31,17 +31,17 @@ AJS.toInit(function () {
             contentType: "application/json",
             data: JSON.stringify({sender: AJS.$("#up-bipper-generate-sendername").val(), accountId: AJS.$("#up-bipper-generate-accountid").val(), password: AJS.$("#up-bipper-generate-accountpass").val()}),
             processData: false,
-            success: function () {
-                AJS.$("#senderName-value").text(AJS.$("#up-bipper-generate-sendername").val());
-                AJS.$("#apiKey-value").text(AJS.$("#up-bipper-generate-sendername").val());
-                AJS.$("#apiKey-value").text(AJS.$("#up-bipper-generate-sendername").val());
+            success: function (response) {
+                AJS.$("#senderName-value").text(response.sender);
+                AJS.$("#apiKey-value").text(response.apiKey);
+                AJS.$("#generationTime-value").text(response.generationTime);
+                AJS.$("#generationTime-block").show();
                 AJS.dialog2("#bipper-admin-generate-dialog").hide();
-                AJS.$("#bipper-action-dialog").removeClass("hidden");
             },
             error: function (error) {
                 if (error.responseText) {
-                    AJS.$("#error").text(error.responseText);
-                    AJS.$("#error").show();
+                    AJS.$("#generate-error").text(error.responseText);
+                    AJS.$("#generate-error").removeClass("hidden");
                 }
             }
         });
@@ -52,6 +52,7 @@ AJS.toInit(function () {
         e.preventDefault();
         AJS.$("#up-bipper-setup-sendername").val(AJS.$("#senderName-value").text());
         AJS.$("#up-bipper-setup-apikey").val(AJS.$("#apiKey-value").text());
+        AJS.$("#setup-error").addClass("hidden");
         AJS.dialog2("#bipper-admin-setup-dialog").show();
     });
 
@@ -71,6 +72,7 @@ AJS.toInit(function () {
         AJS.$("#up-bipper-generate-sendername").val(AJS.$("#senderName-value").text());
         AJS.$("#up-bipper-generate-accountid").val("");
         AJS.$("#up-bipper-generate-accountpass").val("");
+        AJS.$("#generate-error").addClass("hidden");
         AJS.dialog2("#bipper-admin-generate-dialog").show();
     });
 
