@@ -8,8 +8,8 @@ import static java.util.Optional.ofNullable;
 
 import static com.atlassian.jira.permission.GlobalPermissionKey.ADMINISTER;
 
-public class BipperBulkContactsImportAction extends JiraWebActionSupport {
-    private static final Logger log = LoggerFactory.getLogger(BipperBulkContactsImportAction.class);
+public class BeeperContactsViewAction extends JiraWebActionSupport {
+    private static final Logger log = LoggerFactory.getLogger(BeeperContactsViewAction.class);
 
     private boolean hasAdminPermission() {
         return ofNullable(getLoggedInUser())

@@ -1,0 +1,16 @@
+<html>
+<head>
+    <title>$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.title")</title>
+    <meta content="admin" name="decorator"/>
+    <meta content="admin_plugins_menu/bipper-admin-section" name="admin.active.section">
+    <meta content="bipper-admin-contacts-link" name="admin.active.tab">
+    $webResourceManager.requireResource("jira.webresources:global-static")
+    $webResourceManager.requireResource("jira.webresources:jira-global")
+    $webResourceManager.requireResource("com.atlassian.auiplugin:ajs")
+    $webResourceManager.requireResourcesForContext("jira-bipper-admin")
+</head>
+<body class="aui">
+settings-view.vmwedwed
+dwedwedw
+</body>
+</html>
