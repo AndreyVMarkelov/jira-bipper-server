@@ -20,6 +20,17 @@
         <resource type="download" name="jira-bipper-admin.js" location="/ru/andreymarkelov/atlas/plugins/jirabipperserver/js/jira-bipper-admin.js"/>
         <context>jira-bipper-admin</context>
     </web-resource>
+    <web-resource key="jira-bipper-server-contacts-resources" name="Jira Bipper Contacts Web Resources">
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        <dependency>com.atlassian.auiplugin:aui-page-layout</dependency>
+        <dependency>com.atlassian.auiplugin:dialog2</dependency>
+        <dependency>com.atlassian.auiplugin:aui-experimental-restfultable</dependency>
+        <resource type="download" name="jira-bipper-contacts.js" location="/ru/andreymarkelov/atlas/plugins/jirabipperserver/js/jira-bipper-contacts.js"/>
+        <context>jira-bipper-contacts</context>
+    </web-resource>
     <web-resource key="jira-bipper-server-profile-resources" name="Jira Bipper Profile Web Resources">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
         <dependency>com.atlassian.auiplugin:dialog2</dependency>
