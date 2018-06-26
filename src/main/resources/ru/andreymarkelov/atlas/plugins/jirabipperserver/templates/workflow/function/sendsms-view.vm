@@ -1,0 +1,2 @@
+$webResourceManager.requireResourcesForContext("jira-bipper-function")
+Send an SMS with the text "$!{messageText}" to the $!{recipientTypeStr}: ${recipientTypeValue}

@@ -1,0 +1,36 @@
+$webResourceManager.requireResourcesForContext("jira-bipper-function")
+<tr>
+    <td colspan="2">
+        <div id="aui-message-bar"></div>
+    </td>
+</tr>
+<tr class="field-group">
+    <td class="fieldLabelArea"><b>$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.postfunction.messagetext")</b></td>
+    <td nowrap>
+        <input type="hidden" name="userFieldCurrentValue" id="userFieldCurrentValue" value="$!{userFieldValue}"/>
+        <input type="hidden" name="groupFieldCurrentValue" id="groupFieldSelection" value="$!{groupFieldValue}"/>
+        <textarea class="textarea" cols="80" rows="4" name="messageText" id="messageText">$!{messageText}</textarea>
+        <br/><span class="subText">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.postfunction.messagetext.desc")</span>
+    </td>
+</tr>
+<tr class="field-group">
+    <td class="fieldLabelArea"><b>$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.postfunction.sendto")</b></td>
+    <td nowrap>
+        <select name="recipientType" id="recipientType" class="select aui-ss-select width250">
+            <option #if($recipientType == "1")selected="selected"#end value="1">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.postfunction.sendto.type.userfield")</option>
+            <option #if($recipientType == "2")selected="selected"#end value="2">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.postfunction.sendto.type.groupfield")</option>
+            <option #if($recipientType == "3")selected="selected"#end value="3">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.postfunction.sendto.type.user")</option>
+            <option #if($recipientType == "4")selected="selected"#end value="4">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.postfunction.sendto.type.phone")</option>
+        </select>
+        <br/><span class="subText">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.postfunction.sendto.desc")</span>
+    </td>
+</tr>
+<tr class="field-group">
+    <td class="fieldLabelArea"></td>
+    <td nowrap>
+        <select name="userFieldValue" id="userFieldValue" class="select aui-ss-select width250"></select>
+        <select name="groupFieldValue" id="groupFieldValue" class="select aui-ss-select width250" style="display: none;"></select>
+        <input type="text" name="userValue" id="userValue" class="aui-ss" value="$!{userValue}" style="display: none;">
+        <input type="text" name="phoneValue" id="phoneValue" class="aui-ss" value="$!{phoneValue}" style="display: none;">
+    </td>
+</tr>

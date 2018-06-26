@@ -13,14 +13,14 @@
     <resource type="i18n" name="i18n" location="ru.andreymarkelov.atlas.plugins.jirabipperserver.i18n.jira-bipper-server"/>
 
     <!-- Web Resources -->
-    <web-resource key="jira-bipper-server-admin-resources" name="Jira Bipper Admin Web Resources">
+    <web-resource key="jira-bipper-server-admin-resources" name="Jira Beeper Admin Web Resources">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
         <dependency>com.atlassian.auiplugin:aui-page-layout</dependency>
         <dependency>com.atlassian.auiplugin:dialog2</dependency>
         <resource type="download" name="jira-bipper-admin.js" location="/ru/andreymarkelov/atlas/plugins/jirabipperserver/js/jira-bipper-admin.js"/>
         <context>jira-bipper-admin</context>
     </web-resource>
-    <web-resource key="jira-bipper-server-contacts-resources" name="Jira Bipper Contacts Web Resources">
+    <web-resource key="jira-bipper-server-contacts-resources" name="Jira Beeper Contacts Web Resources">
         <transformation extension="js">
             <transformer key="jsI18n"/>
         </transformation>
@@ -31,6 +31,12 @@
         <resource type="download" name="jira-bipper-contacts.js" location="/ru/andreymarkelov/atlas/plugins/jirabipperserver/js/jira-bipper-contacts.js"/>
         <context>jira-bipper-contacts</context>
     </web-resource>
+    <web-resource key="jira-bipper-server-function-resources" name="Jira Bipper Function Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        <resource type="download" name="jira-bipper-function.css" location="/ru/andreymarkelov/atlas/plugins/jirabipperserver/js/jira-bipper-function.css"/>
+        <resource type="download" name="jira-bipper-function.js" location="/ru/andreymarkelov/atlas/plugins/jirabipperserver/js/jira-bipper-function.js"/>
+        <context>jira-bipper-function</context>
+    </web-resource>
     <web-resource key="jira-bipper-server-profile-resources" name="Jira Bipper Profile Web Resources">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
         <dependency>com.atlassian.auiplugin:dialog2</dependency>
@@ -39,7 +45,7 @@
     </web-resource>
 
     <!-- Profile Panel -->
-    <web-panel key="bipper-profile-panel" name="Jira Bipper Profile Panel" location="webpanels.user.profile.summary.custom" weight="250">
+    <web-panel key="bipper-profile-panel" name="Jira Beeper Profile Panel" location="webpanels.user.profile.summary.custom" weight="250">
         <context>atl.userprofile</context>
         <condition class="ru.andreymarkelov.atlas.plugins.jirabipperserver.panel.ProfileNumberPanelCondition"/>
         <context-provider class="ru.andreymarkelov.atlas.plugins.jirabipperserver.panel.ProfileNumberPanel"/>
@@ -47,16 +53,16 @@
     </web-panel>
 
     <!-- Components -->
-    <component key="bipper-auth-settings-manager" name="Jira Bipper Auth Manager" class="ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.impl.AuthManagerImpl">
+    <component key="bipper-auth-settings-manager" name="Jira Beeper Auth Manager" class="ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.impl.AuthManagerImpl">
         <interface>ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.AuthManager</interface>
     </component>
-    <component key="bipper-contact-settings-manager" name="Jira Bipper Contacts Manager" class="ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.impl.ContactManagerImpl">
+    <component key="bipper-contact-settings-manager" name="Jira Beeper Contacts Manager" class="ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.impl.ContactManagerImpl">
         <interface>ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.ContactManager</interface>
     </component>
-    <component key="bipper-events-settings-manager" name="Jira Bipper Events Manager" class="ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.impl.EventsManagerImpl">
+    <component key="bipper-events-settings-manager" name="Jira Beeper Events Manager" class="ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.impl.EventsManagerImpl">
         <interface>ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.EventsManager</interface>
     </component>
-    <component key="bipper-sender-service" name="Jira Bipper Sender Service" class="ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.impl.SenderServiceImpl">
+    <component key="bipper-sender-service" name="Jira Beeper Sender Service" class="ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.impl.SenderServiceImpl">
         <interface>ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.SenderService</interface>
     </component>
     <component key="tx-processor" name="Transactional Annotation Processor" class="com.atlassian.activeobjects.external.TransactionalAnnotationProcessor"/>
@@ -68,25 +74,25 @@
     <component-import key="transactionTemplate" interface="com.atlassian.sal.api.transaction.TransactionTemplate"/>
 
     <!-- REST -->
-    <rest key="bipper-rest-resource" name="Jira Bipper Rest Resource" path="/bipper" version="1.0">
-        <description>Jira Bipper REST Resources.</description>
+    <rest key="bipper-rest-resource" name="Jira Beeper Rest Resource" path="/bipper" version="1.0">
+        <description>Jira Beeper REST Resources.</description>
     </rest>
 
     <!-- AO -->
-    <ao key="bipper-auth-ao-module" name="Jira Bipper AO Module">
+    <ao key="bipper-auth-ao-module" name="Jira Beeper AO Module">
         <entity>ru.andreymarkelov.atlas.plugins.jirabipperserver.data.ao.ContantAO</entity>
         <entity>ru.andreymarkelov.atlas.plugins.jirabipperserver.data.ao.EventSettingsAO</entity>
     </ao>
 
     <!-- Web Items -->
-    <web-section key="bipper-admin-section" name="Jira Bipper Admin Section" location="admin_plugins_menu">
+    <web-section key="bipper-admin-section" name="Jira Beeper Admin Section" location="admin_plugins_menu">
         <label key="ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.section"/>
         <tooltip key="ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.section.tooltip"/>
         <conditions type="AND">
             <condition class="com.atlassian.jira.plugin.webfragment.conditions.IsAdminCondition"/>
         </conditions>
     </web-section>
-    <web-item key="bipper-admin-settings-link" name="Jira Bipper Settings" section="admin_plugins_menu/bipper-admin-section" weight="200">
+    <web-item key="bipper-admin-settings-link" name="Jira Beeper Settings" section="admin_plugins_menu/bipper-admin-section" weight="200">
         <label key="ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.settings.link"/>
         <description key="ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.settings.link.desc"/>
         <condition class="com.atlassian.jira.plugin.webfragment.conditions.JiraGlobalPermissionCondition">
@@ -94,7 +100,7 @@
         </condition>
         <link linkId="bipper-admin-settings-link">/secure/BeeperSettingsViewAction!default.jspa</link>
     </web-item>
-    <web-item key="bipper-admin-contacts-link" name="Jira Bipper Contacts" section="admin_plugins_menu/bipper-admin-section" weight="201">
+    <web-item key="bipper-admin-contacts-link" name="Jira Beeper Contacts" section="admin_plugins_menu/bipper-admin-section" weight="201">
         <label key="ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.contacts.link"/>
         <description key="ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.contacts.link.desc"/>
         <condition class="com.atlassian.jira.plugin.webfragment.conditions.JiraGlobalPermissionCondition">
@@ -104,7 +110,7 @@
     </web-item>
 
     <!-- Web Actions -->
-    <webwork1 key="bipper-actions" name="Jira Bipper Web Actions" class="java.lang.Object">
+    <webwork1 key="bipper-actions" name="Jira Beeper Web Actions" class="java.lang.Object">
         <actions>
             <action name="ru.andreymarkelov.atlas.plugins.jirabipperserver.action.admin.BeeperSettingsViewAction" alias="BeeperSettingsViewAction">
                 <view name="input">/ru/andreymarkelov/atlas/plugins/jirabipperserver/templates/admin/settings-view.vm</view>
@@ -120,4 +126,18 @@
             </action>
         </actions>
     </webwork1>
+
+    <!-- Post functions -->
+    <workflow-function key="bipper-postfunction" name="Jira Beeper Post Function"
+                       i18n-name-key="ru.andreymarkelov.atlas.plugins.jira-bipper-server.postfunction.name"
+                       class="ru.andreymarkelov.atlas.plugins.jirabipperserver.workflow.function.SendSmsFunctionFactory">
+        <description key="ru.andreymarkelov.atlas.plugins.jira-bipper-server.postfunction.desc"/>
+        <function-class>ru.andreymarkelov.atlas.plugins.jirabipperserver.workflow.function.SendSmsFunction</function-class>
+        <unique>false</unique>
+        <orderable>true</orderable>
+        <deletable>true</deletable>
+        <resource type="velocity" name="view" location="/ru/andreymarkelov/atlas/plugins/jirabipperserver/templates/workflow/function/sendsms-view.vm"/>
+        <resource type="velocity" name="input-parameters" location="/ru/andreymarkelov/atlas/plugins/jirabipperserver/templates/workflow/function/sendsms-input.vm"/>
+        <resource type="velocity" name="edit-parameters" location="/ru/andreymarkelov/atlas/plugins/jirabipperserver/templates/workflow/function/sendsms-input.vm"/>
+    </workflow-function>
 </atlassian-plugin>
