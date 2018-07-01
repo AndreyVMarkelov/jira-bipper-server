@@ -33,7 +33,7 @@
     </web-resource>
     <web-resource key="jira-bipper-server-function-resources" name="Jira Bipper Function Web Resources">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
-        <resource type="download" name="jira-bipper-function.css" location="/ru/andreymarkelov/atlas/plugins/jirabipperserver/js/jira-bipper-function.css"/>
+        <resource type="download" name="jira-bipper-function.css" location="/ru/andreymarkelov/atlas/plugins/jirabipperserver/css/jira-bipper-function.css"/>
         <resource type="download" name="jira-bipper-function.js" location="/ru/andreymarkelov/atlas/plugins/jirabipperserver/js/jira-bipper-function.js"/>
         <context>jira-bipper-function</context>
     </web-resource>
@@ -65,6 +65,13 @@
     <component key="bipper-sender-service" name="Jira Beeper Sender Service" class="ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.impl.SenderServiceImpl">
         <interface>ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.SenderService</interface>
     </component>
+    <component key="bipper-message-formatter" name="Jira Beeper Message Formatter" class="ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.impl.MessageFormatterImpl">
+        <interface>ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.MessageFormatter</interface>
+    </component>
+    <component key="bipper-message-number-extractor" name="Jira Beeper Number Extractor" class="ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.impl.NumberExtractorImpl">
+        <interface>ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor</interface>
+    </component>
+
     <component key="tx-processor" name="Transactional Annotation Processor" class="com.atlassian.activeobjects.external.TransactionalAnnotationProcessor"/>
 
     <!-- Component Imports -->
