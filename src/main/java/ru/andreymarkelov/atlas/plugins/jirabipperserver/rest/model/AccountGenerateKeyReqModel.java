@@ -11,6 +11,9 @@ public class AccountGenerateKeyReqModel {
     @XmlElement(name = "sender")
     private String sender;
 
+    @XmlElement(name = "accountKey")
+    private String accountKey;
+
     @XmlElement(name = "accountId")
     private String accountId;
 
@@ -20,8 +23,9 @@ public class AccountGenerateKeyReqModel {
     protected AccountGenerateKeyReqModel() {
     }
 
-    public AccountGenerateKeyReqModel(String sender, String accountId, String password) {
+    public AccountGenerateKeyReqModel(String sender, String accountKey, String accountId, String password) {
         this.sender = sender;
+        this.accountKey = accountKey;
         this.accountId = accountId;
         this.password = password;
     }
@@ -32,6 +36,14 @@ public class AccountGenerateKeyReqModel {
 
     public void setSender(String sender) {
         this.sender = sender;
+    }
+
+    public String getAccountKey() {
+        return accountKey;
+    }
+
+    public void setAccountKey(String accountKey) {
+        this.accountKey = accountKey;
     }
 
     public String getAccountId() {
@@ -54,6 +66,7 @@ public class AccountGenerateKeyReqModel {
     public String toString() {
         return "AccountGenerateKeyReqModel{" +
                 "sender='" + sender + '\'' +
+                ", accountKey='" + accountKey + '\'' +
                 ", accountId='" + accountId + '\'' +
                 '}';
     }

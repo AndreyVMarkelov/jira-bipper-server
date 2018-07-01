@@ -12,7 +12,7 @@ AJS.toInit(function () {
                 AJS.$("#senderName-value").text(AJS.$("#up-bipper-setup-sendername").val());
                 AJS.$("#apiKey-value").text(AJS.$("#up-bipper-setup-apikey").val());
                 AJS.$("#generationTime-value").text("");
-                AJS.$("#generationTime-block").hide();
+                AJS.$("#generationTime-block").addClass("hidden");
             },
             error: function (error) {
                 if (error.responseText) {
@@ -29,13 +29,18 @@ AJS.toInit(function () {
             type: "PUT",
             dataType : "json",
             contentType: "application/json",
-            data: JSON.stringify({sender: AJS.$("#up-bipper-generate-sendername").val(), accountId: AJS.$("#up-bipper-generate-accountid").val(), password: AJS.$("#up-bipper-generate-accountpass").val()}),
+            data: JSON.stringify({
+                sender: AJS.$("#up-bipper-generate-sendername").val(),
+                accountKey: AJS.$("#up-bipper-generate-accountkey").val(),
+                accountId: AJS.$("#up-bipper-generate-accountid").val(),
+                password: AJS.$("#up-bipper-generate-accountpass").val()
+            }),
             processData: false,
             success: function (response) {
                 AJS.$("#senderName-value").text(response.sender);
                 AJS.$("#apiKey-value").text(response.apiKey);
                 AJS.$("#generationTime-value").text(response.generationTime);
-                AJS.$("#generationTime-block").show();
+                AJS.$("#generationTime-block").removeClass("hidden");
                 AJS.dialog2("#bipper-admin-generate-dialog").hide();
             },
             error: function (error) {
@@ -70,6 +75,7 @@ AJS.toInit(function () {
     AJS.$("#edit-bipper-admin-password-link").click(function(e) {
         e.preventDefault();
         AJS.$("#up-bipper-generate-sendername").val(AJS.$("#senderName-value").text());
+        AJS.$("#up-bipper-generate-accountkey").val("");
         AJS.$("#up-bipper-generate-accountid").val("");
         AJS.$("#up-bipper-generate-accountpass").val("");
         AJS.$("#generate-error").addClass("hidden");

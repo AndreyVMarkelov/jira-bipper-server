@@ -1,5 +1,7 @@
 package ru.andreymarkelov.atlas.plugins.jirabipperserver.rest;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -26,6 +28,8 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 @Path("/admin")
 public class AdminResource {
     private static final Logger log = LoggerFactory.getLogger(AdminResource.class);
+
+    private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     private final SenderService senderService;
     private final JiraAuthenticationContext authenticationContext;
@@ -62,12 +66,12 @@ public class AdminResource {
         }
 
         try {
-            String apiKey = senderService.generateApiKey(model.getAccountId(), model.getPassword());
+            String apiKey = senderService.generateApiKey(model.getAccountKey(), model.getAccountId(), model.getPassword());
             Long generationTime = System.currentTimeMillis();
             authManager.setSenderName(model.getSender());
             authManager.setApiKey(apiKey);
             authManager.setGenerationTime(generationTime);
-            return status(OK).entity(new AccountSetupKeyReqRespModel(model.getSender(), apiKey, generationTime)).build();
+            return status(OK).entity(new AccountSetupKeyReqRespModel(model.getSender(), apiKey, dateFormat.format(generationTime))).build();
         } catch (Exception e) {
             return status(BAD_REQUEST)
                     .entity(authenticationContext.getI18nHelper().getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.rest.admin.generatekey", e.getMessage()))

@@ -1,5 +1,8 @@
 package ru.andreymarkelov.atlas.plugins.jirabipperserver.action.admin;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import com.atlassian.jira.web.action.JiraWebActionSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,11 +15,13 @@ import static com.atlassian.jira.permission.GlobalPermissionKey.ADMINISTER;
 public class BeeperSettingsViewAction extends JiraWebActionSupport {
     private static final Logger log = LoggerFactory.getLogger(BeeperSettingsViewAction.class);
 
+    private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     private final AuthManager authManager;
 
     private String senderName;
     private String apiKey;
-    private Long generationTime;
+    private String generationTime;
 
     public BeeperSettingsViewAction(AuthManager authManager) {
         this.authManager = authManager;
@@ -29,7 +34,7 @@ public class BeeperSettingsViewAction extends JiraWebActionSupport {
         }
         senderName = authManager.getSenderName();
         apiKey = authManager.getApiKey();
-        generationTime = authManager.getGenerationTime();
+        generationTime = ofNullable(authManager.getGenerationTime()).map(dateFormat::format).orElse(null);
         return INPUT;
     }
 
@@ -47,7 +52,7 @@ public class BeeperSettingsViewAction extends JiraWebActionSupport {
         return apiKey;
     }
 
-    public Long getGenerationTime() {
+    public String getGenerationTime() {
         return generationTime;
     }
 }

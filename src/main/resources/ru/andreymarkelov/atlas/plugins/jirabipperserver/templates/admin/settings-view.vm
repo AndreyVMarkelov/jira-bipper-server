@@ -66,13 +66,11 @@
                             <div class="field-value" id="apiKey-value">$!{apiKey}</div>
                             <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.apikey.desc")</div>
                         </div>
-                        #if ($generationTime)
-                        <div class="field-group" id="generationTime-block">
+                        <div class="field-group #if(!$generationTime)hidden#end" id="generationTime-block">
                             <label for="generationTime-value">$action.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.generatetime"):</label>
-                            <div class="field-value" id="generationTime-value">${generationTime}</div>
+                            <div class="field-value" id="generationTime-value">$!{generationTime}</div>
                             <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.generatetime.desc")</div>
                         </div>
-                        #end
                     </form>
                 </div>
             </section>
@@ -120,7 +118,7 @@
         </footer>
     </form>
 </section>
-<section role="dialog" id="bipper-admin-generate-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+<section role="dialog" id="bipper-admin-generate-dialog" class="aui-layer aui-dialog2 aui-dialog2-large" aria-hidden="true">
     <form action="#" class="aui" id="update-infobip-account" method="post">
         <header class="aui-dialog2-header">
             <h2 class="aui-dialog2-header-main">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.generatekey.title")</h2>
@@ -147,6 +145,14 @@
                         </label>
                         <input class="text" id="up-bipper-generate-sendername" maxlength="255" name="up-bipper-sendername" type="text"/>
                         <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.generatekey.sendername.desc")</div>
+                    </div>
+                    <div class="field-group">
+                        <label for="up-bipper-generate-accountkey">
+                            $i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.generatekey.accountkey")
+                            <span class="aui-icon icon-required"> required</span>
+                        </label>
+                        <input class="text" id="up-bipper-generate-accountkey" maxlength="255" name="up-bipper-generate-accountkey" type="text"/>
+                        <div class="description">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.admin.account.generatekey.accountkey.desc")</div>
                     </div>
                     <div class="field-group">
                         <label for="up-bipper-accountid">
