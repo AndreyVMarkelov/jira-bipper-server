@@ -4,7 +4,9 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -27,6 +29,7 @@ import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.AuthManager;
 import ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.SenderService;
 
 import static java.util.Base64.getEncoder;
@@ -36,6 +39,13 @@ public class SenderServiceImpl implements SenderService {
     private static final Logger log = LoggerFactory.getLogger(SenderServiceImpl.class);
 
     private static final String INFOBIP_AUTH_URL = "https://api.infobip.com/settings/1/accounts/ACCOUNT_KEY/api-keys";
+    private static final String INFOBIP_SEND_URL = "https://api.infobip.com/sms/1/text/single";
+
+    private final AuthManager authManager;
+
+    public SenderServiceImpl(AuthManager authManager) {
+        this.authManager = authManager;
+    }
 
     private static SSLContext createSslContext() {
         try {
@@ -65,6 +75,25 @@ public class SenderServiceImpl implements SenderService {
             throw new RuntimeException(Objects.toString(message, "Unhandled exception"));
         }
         return JsonPath.compile("$.publicApiKey").read(EntityUtils.toString(httpResponse.getEntity()), String.class);
+    }
+
+    @Override
+    public boolean sendMessage(String text, List<String> phones) throws Exception {
+        CloseableHttpClient httpClient = createClient();
+        HttpPost request = new HttpPost(INFOBIP_SEND_URL);
+        request.setHeader(HttpHeaders.AUTHORIZATION, "App " + authManager.getApiKey());
+
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("from", authManager.getSenderName());
+        payload.put("text", text);
+        payload.put("to", phones);
+        request.setEntity(new StringEntity(new Gson().toJson(payload)));
+
+        CloseableHttpResponse httpResponse = httpClient.execute(request);
+        if (httpResponse.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
+            return false;
+        }
+        return true;
     }
 
     private CloseableHttpClient createClient() {

@@ -1,6 +1,7 @@
 package ru.andreymarkelov.atlas.plugins.jirabipperserver.workflow.function;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.atlassian.jira.issue.Issue;
@@ -13,6 +14,11 @@ import org.slf4j.LoggerFactory;
 import ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.MessageFormatter;
 import ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor;
 import ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.SenderService;
+
+import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.GROUP_FIELD;
+import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.PHONE;
+import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.USER;
+import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.USER_FIELD;
 
 public class SendSmsFunction extends AbstractJiraFunctionProvider {
     private static final Logger log = LoggerFactory.getLogger(SendSmsFunction.class);
@@ -36,29 +42,26 @@ public class SendSmsFunction extends AbstractJiraFunctionProvider {
 
         String message = (String) args.get("messageText");
 
-        String recipientType = (String) args.get("recipientType");
-        String value = null;
-        switch (recipientType) {
-            case "1":
-                value = (String) args.get("userFieldValue");
+        List<String> phones = new ArrayList<>();
+        switch ((String) args.get("recipientType")) {
+            case USER_FIELD:
+                phones.addAll(numberExtractor.getUserFieldPhones(issue, (String) args.get("userFieldValue")));
                 break;
-            case "2":
-                value = (String) args.get("groupFieldValue");
+            case GROUP_FIELD:
+                phones.addAll(numberExtractor.getGroupFieldPhones(issue, (String) args.get("groupFieldValue")));
                 break;
-            case "3":
-                value = (String) args.get("userValue");
+            case USER:
+                phones.add(numberExtractor.getUserPhone((String) args.get("userValue")));
                 break;
-            case "4":
-                value = (String) args.get("phoneValue");
+            case PHONE:
+                phones.add((String) args.get("phoneValue"));
                 break;
         }
 
-
-
-        String text = messageFormatter.formatMessage(message, issue);
-
-        HashMap<String, String> parameters = new HashMap();
+        try {
+            senderService.sendMessage(messageFormatter.formatMessage(message, issue), phones);
+        } catch (Exception ex) {
+            log.error("Cannot send Infobip message", ex);
+        }
     }
-
-
 }

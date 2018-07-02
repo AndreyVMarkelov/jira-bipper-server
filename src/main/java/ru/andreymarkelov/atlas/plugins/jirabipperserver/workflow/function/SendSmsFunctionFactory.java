@@ -10,6 +10,11 @@ import com.atlassian.jira.util.I18nHelper;
 import com.opensymphony.workflow.loader.AbstractDescriptor;
 import com.opensymphony.workflow.loader.FunctionDescriptor;
 
+import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.GROUP_FIELD;
+import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.PHONE;
+import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.USER;
+import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.USER_FIELD;
+
 public class SendSmsFunctionFactory extends AbstractWorkflowPluginFactory implements WorkflowPluginFunctionFactory {
     private final I18nHelper i18nHelper;
 
@@ -42,19 +47,19 @@ public class SendSmsFunctionFactory extends AbstractWorkflowPluginFactory implem
         String recipientTypeStr = null;
         String recipientTypeValue = null;
         switch (recipientType) {
-            case "1": {
+            case USER_FIELD: {
                 recipientTypeStr = i18nHelper.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.postfunction.sendto.type.userfield");
                 recipientTypeValue = userFieldValue;
                 break;
-            } case "2": {
+            } case GROUP_FIELD: {
                 recipientTypeStr = i18nHelper.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.postfunction.sendto.type.groupfield");
                 recipientTypeValue = groupFieldValue;
                 break;
-            } case "3": {
+            } case USER: {
                 recipientTypeStr = i18nHelper.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.postfunction.sendto.type.user");
                 recipientTypeValue = userValue;
                 break;
-            } case "4": {
+            } case PHONE: {
                 recipientTypeStr = i18nHelper.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.postfunction.sendto.type.phone");
                 recipientTypeValue = phoneValue;
                 break;
@@ -80,22 +85,22 @@ public class SendSmsFunctionFactory extends AbstractWorkflowPluginFactory implem
         String phoneValue = extractSingleParam(formParams, "phoneValue");
 
         switch (recipientType) {
-            case "1": {
+            case USER_FIELD: {
                 groupFieldValue = null;
                 userValue = null;
                 phoneValue = null;
                 break;
-            } case "2": {
+            } case GROUP_FIELD: {
                 userFieldValue = null;
                 userValue = null;
                 phoneValue = null;
                 break;
-            } case "3": {
+            } case USER: {
                 userFieldValue = null;
                 groupFieldValue = null;
                 phoneValue = null;
                 break;
-            } case "4": {
+            } case PHONE: {
                 userFieldValue = null;
                 groupFieldValue = null;
                 userValue = null;
