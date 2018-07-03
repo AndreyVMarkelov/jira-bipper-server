@@ -15,6 +15,7 @@ import ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.MessageFormatter
 import ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor;
 import ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.SenderService;
 
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.GROUP_FIELD;
 import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.PHONE;
 import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.USER;
@@ -51,10 +52,16 @@ public class SendSmsFunction extends AbstractJiraFunctionProvider {
                 phones.addAll(numberExtractor.getGroupFieldPhones(issue, (String) args.get("groupFieldValue")));
                 break;
             case USER:
-                phones.add(numberExtractor.getUserPhone((String) args.get("userValue")));
+                String userPhone = numberExtractor.getUserPhone((String) args.get("userValue"));
+                if (isNotBlank(userPhone)) {
+                    phones.add(userPhone);
+                }
                 break;
             case PHONE:
-                phones.add((String) args.get("phoneValue"));
+                String phone = (String) args.get("phoneValue");
+                if (isNotBlank(phone)) {
+                    phones.add(phone);
+                }
                 break;
         }
 

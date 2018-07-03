@@ -1,7 +1,6 @@
 package ru.andreymarkelov.atlas.plugins.jirabipperserver.rest;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -18,27 +17,28 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.andreymarkelov.atlas.plugins.jirabipperserver.rest.model.FieldModel;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
+
+import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.ASSIGNEE_FIELD_CLASS;
+import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.CREATOR_FIELD_CLASS;
+import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.REPORTER_FIELD_CLASS;
+import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.VOTES_FIELD_CLASS;
+import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.WATCHES_FIELD_CLASS;
 
 @Path("/postfunction")
 public class PostFunctionResource {
     private static final Logger log = LoggerFactory.getLogger(PostFunctionResource.class);
 
-    private static final List<String> userFieldNames = Arrays.asList(
-            "com.atlassian.jira.issue.fields.AssigneeSystemField",
-            "com.atlassian.jira.issue.fields.ReporterSystemField",
-            "com.atlassian.jira.issue.fields.CreatorSystemField",
-            "com.atlassian.jira.issue.fields.WatchesSystemField",
-            "com.atlassian.jira.issue.fields.VotesSystemField"
-    );
+    private static final List<String> userFieldNames = asList(ASSIGNEE_FIELD_CLASS, REPORTER_FIELD_CLASS, CREATOR_FIELD_CLASS, WATCHES_FIELD_CLASS, VOTES_FIELD_CLASS);
 
-    private static final List<String> userCustomFieldTypes = Arrays.asList(
+    private static final List<String> userCustomFieldTypes = asList(
             "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
             "com.atlassian.jira.plugin.system.customfieldtypes:multiuserpicker",
             "com.atlassian.servicedesk:sd-request-participants"
     );
 
-    private static final List<String> groupCustomFieldTypes = Arrays.asList(
+    private static final List<String> groupCustomFieldTypes = asList(
             "com.atlassian.jira.plugin.system.customfieldtypes:grouppicker",
             "com.atlassian.jira.plugin.system.customfieldtypes:multigrouppicker"
     );
