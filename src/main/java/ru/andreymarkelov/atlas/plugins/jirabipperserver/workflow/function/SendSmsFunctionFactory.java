@@ -23,8 +23,8 @@ public class SendSmsFunctionFactory extends AbstractWorkflowPluginFactory implem
     }
 
     protected void getVelocityParamsForInput(Map<String, Object> velocityParams) {
-        velocityParams.put("messageText", "The issue {issue.key} requires your immediate attention! Please, go to {issue.link}");
-        velocityParams.put("recipientType", "1");
+        velocityParams.put("messageText", "The issue {{issue_key}} requires your immediate attention! See, {{issue_link}}");
+        velocityParams.put("recipientType", USER_FIELD);
     }
 
     protected void getVelocityParamsForEdit(Map<String, Object> velocityParams, AbstractDescriptor descriptor) {
