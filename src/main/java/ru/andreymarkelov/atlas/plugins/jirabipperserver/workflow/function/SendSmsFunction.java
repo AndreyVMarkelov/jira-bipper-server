@@ -58,6 +58,10 @@ public class SendSmsFunction extends AbstractJiraFunctionProvider {
                 break;
         }
 
+        if (phones.isEmpty()) {
+            return;
+        }
+
         try {
             senderService.sendMessage(messageFormatter.formatMessage(message, issue), phones);
         } catch (Exception ex) {

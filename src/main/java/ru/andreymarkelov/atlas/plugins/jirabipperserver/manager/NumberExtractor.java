@@ -1,6 +1,6 @@
 package ru.andreymarkelov.atlas.plugins.jirabipperserver.manager;
 
-import java.util.List;
+import java.util.Set;
 
 import com.atlassian.jira.issue.Issue;
 
@@ -11,6 +11,6 @@ public interface NumberExtractor {
     String PHONE = "4";
 
     String getUserPhone(String user);
-    List<String> getUserFieldPhones(Issue issue, String field);
-    List<String> getGroupFieldPhones(Issue issue, String field);
+    Set<String> getUserFieldPhones(Issue issue, String field);
+    Set<String> getGroupFieldPhones(Issue issue, String field);
 }
