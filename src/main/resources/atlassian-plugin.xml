@@ -4,7 +4,7 @@
         <version>${project.version}</version>
         <vendor name="${project.organization.name}" url="${project.organization.url}" />
         <param name="vendor-icon">/ru/andreymarkelov/atlas/plugins/jirabipperserver/images/32.jpg</param>
-        <param name="vendor-icon">/ru/andreymarkelov/atlas/plugins/jirabipperserver/images/144.jpg</param>
+        <param name="vendor-logo">/ru/andreymarkelov/atlas/plugins/jirabipperserver/images/144.jpg</param>
         <param name="plugin-icon">/ru/andreymarkelov/atlas/plugins/jirabipperserver/images/bipper-icon.png</param>
         <param name="plugin-logo">/ru/andreymarkelov/atlas/plugins/jirabipperserver/images/bipper-logo.png</param>
         <param name="configure.url">/secure/BeeperSettingsViewAction!default.jspa</param>

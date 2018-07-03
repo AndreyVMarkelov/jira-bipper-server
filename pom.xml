@@ -14,7 +14,7 @@
     </organization>
 
     <name>Beeper – Multi-Channel Notifications</name>
-    <description>This is the ru.andreymarkelov.atlas.plugins:jira-bipper-server plugin for Atlassian JIRA.</description>
+    <description>Multi-Channel Notifications sender with Infobip for Jira.</description>
     <packaging>atlassian-plugin</packaging>
 
     <dependencies>
