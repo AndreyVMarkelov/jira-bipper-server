@@ -45,6 +45,12 @@
         <resource name="jira-bipper-profile.js" type="download" location="/ru/andreymarkelov/atlas/plugins/jirabipperserver/js/jira-bipper-profile.js"/>
         <context>jira-bipper-profile</context>
     </web-resource>
+    <web-resource key="jira-bipper-listeners-resources" name="Jira Bipper Listeners Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        <dependency>com.atlassian.auiplugin:dialog2</dependency>
+        <resource name="jira-bipper-listeners.js" type="download" location="/ru/andreymarkelov/atlas/plugins/jirabipperserver/js/jira-bipper-listeners.js"/>
+        <context>jira-bipper-listeners</context>
+    </web-resource>
 
     <!-- Profile Panel -->
     <web-panel key="bipper-profile-panel" name="Jira Beeper Profile Panel" location="webpanels.user.profile.summary.custom" weight="250">
