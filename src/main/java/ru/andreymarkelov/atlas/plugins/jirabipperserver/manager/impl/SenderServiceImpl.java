@@ -1,16 +1,5 @@
 package ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.impl;
 
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLContext;
-
 import com.google.gson.Gson;
 import com.nebhale.jsonpath.JsonPath;
 import org.apache.http.Header;
@@ -31,6 +20,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.AuthManager;
 import ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.SenderService;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
+import java.nio.charset.StandardCharsets;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import static java.util.Base64.getEncoder;
 import static java.util.Collections.singletonMap;
@@ -82,12 +83,13 @@ public class SenderServiceImpl implements SenderService {
         CloseableHttpClient httpClient = createClient();
         HttpPost request = new HttpPost(INFOBIP_SEND_URL);
         request.setHeader(HttpHeaders.AUTHORIZATION, "App " + authManager.getApiKey());
+        request.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
 
         Map<String, Object> payload = new HashMap<>();
         payload.put("from", authManager.getSenderName());
         payload.put("text", text);
         payload.put("to", phones);
-        request.setEntity(new StringEntity(new Gson().toJson(payload)));
+        request.setEntity(new StringEntity(new Gson().toJson(payload), StandardCharsets.UTF_8));
 
         CloseableHttpResponse httpResponse = httpClient.execute(request);
         if (httpResponse.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {

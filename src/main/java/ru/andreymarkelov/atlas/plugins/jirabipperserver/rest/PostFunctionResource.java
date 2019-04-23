@@ -1,14 +1,5 @@
 package ru.andreymarkelov.atlas.plugins.jirabipperserver.rest;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
-
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.issue.fields.FieldException;
 import com.atlassian.jira.issue.fields.FieldManager;
@@ -17,9 +8,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.andreymarkelov.atlas.plugins.jirabipperserver.rest.model.FieldModel;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
-
 import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.ASSIGNEE_FIELD_CLASS;
 import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.CREATOR_FIELD_CLASS;
 import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.REPORTER_FIELD_CLASS;
@@ -43,6 +42,10 @@ public class PostFunctionResource {
             "com.atlassian.jira.plugin.system.customfieldtypes:multigrouppicker"
     );
 
+    private static final List<String> textCustomFieldTypes = asList(
+            "com.atlassian.jira.plugin.system.customfieldtypes:textfield"
+    );
+
     private final FieldManager fieldManager;
 
     public PostFunctionResource(FieldManager fieldManager) {
@@ -63,10 +66,18 @@ public class PostFunctionResource {
         return Response.ok(getFields(1)).build();
     }
 
+    @GET
+    @Produces({"application/json", "application/xml"})
+    @Path("/issuetextfields")
+    public Response getTextFields() {
+        return Response.ok(getFields(2)).build();
+    }
+
     private Collection<FieldModel> getFields(int type) {
         try {
             Collection<FieldModel> userFields = new ArrayList<>();
             Collection<FieldModel> groupFields = new ArrayList<>();
+            Collection<FieldModel> textFields = new ArrayList<>();
 
             Iterator<NavigableField> navigableFieldIterator = fieldManager.getAllAvailableNavigableFields().iterator();
             while (navigableFieldIterator.hasNext()) {
@@ -84,10 +95,20 @@ public class PostFunctionResource {
                     if (groupCustomFieldTypes.contains(cf.getCustomFieldType().getKey())) {
                         groupFields.add(new FieldModel(cf.getId(), cf.getName()));
                     }
+
+                    if (textCustomFieldTypes.contains(cf.getCustomFieldType().getKey())) {
+                        textFields.add(new FieldModel(cf.getId(), cf.getName()));
+                    }
                 }
             }
 
-            return (type == 0) ? userFields : groupFields;
+            if (type == 0) {
+                return userFields;
+            } else if (type == 1) {
+                return groupFields;
+            } else {
+                return textFields;
+            }
         } catch (FieldException ex) {
             log.error("Error reading custom fields", ex);
             return emptyList();

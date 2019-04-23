@@ -1,17 +1,18 @@
 package ru.andreymarkelov.atlas.plugins.jirabipperserver.workflow.function;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-
 import com.atlassian.jira.plugin.workflow.AbstractWorkflowPluginFactory;
 import com.atlassian.jira.plugin.workflow.WorkflowPluginFunctionFactory;
 import com.atlassian.jira.util.I18nHelper;
 import com.opensymphony.workflow.loader.AbstractDescriptor;
 import com.opensymphony.workflow.loader.FunctionDescriptor;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
 import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.GROUP_FIELD;
 import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.PHONE;
+import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.TEXT_FIELD;
 import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.USER;
 import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.USER_FIELD;
 
@@ -43,6 +44,7 @@ public class SendSmsFunctionFactory extends AbstractWorkflowPluginFactory implem
         String groupFieldValue = (String) functionDescriptor.getArgs().get("groupFieldValue");
         String userValue = (String) functionDescriptor.getArgs().get("userValue");
         String phoneValue = (String) functionDescriptor.getArgs().get("phoneValue");
+        String textFieldValue = (String) functionDescriptor.getArgs().get("textFieldValue");
 
         String recipientTypeStr = null;
         String recipientTypeValue = null;
@@ -63,6 +65,9 @@ public class SendSmsFunctionFactory extends AbstractWorkflowPluginFactory implem
                 recipientTypeStr = i18nHelper.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.postfunction.sendto.type.phone");
                 recipientTypeValue = phoneValue;
                 break;
+            } case TEXT_FIELD: {
+                recipientTypeStr = i18nHelper.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.postfunction.sendto.type.textfield");
+                recipientTypeValue = textFieldValue;
             }
         }
 
@@ -72,6 +77,7 @@ public class SendSmsFunctionFactory extends AbstractWorkflowPluginFactory implem
         velocityParams.put("groupFieldValue", groupFieldValue);
         velocityParams.put("userValue", userValue);
         velocityParams.put("phoneValue", phoneValue);
+        velocityParams.put("textFieldValue", textFieldValue);
         velocityParams.put("recipientTypeStr", recipientTypeStr);
         velocityParams.put("recipientTypeValue", recipientTypeValue);
     }
@@ -83,27 +89,38 @@ public class SendSmsFunctionFactory extends AbstractWorkflowPluginFactory implem
         String groupFieldValue = extractSingleParam(formParams, "groupFieldValue");
         String userValue = extractSingleParam(formParams, "userValue");
         String phoneValue = extractSingleParam(formParams, "phoneValue");
+        String textFieldValue = extractSingleParam(formParams, "textFieldValue");
 
         switch (recipientType) {
             case USER_FIELD: {
                 groupFieldValue = null;
                 userValue = null;
                 phoneValue = null;
+                textFieldValue = null;
                 break;
             } case GROUP_FIELD: {
                 userFieldValue = null;
                 userValue = null;
                 phoneValue = null;
+                textFieldValue = null;
                 break;
             } case USER: {
                 userFieldValue = null;
                 groupFieldValue = null;
                 phoneValue = null;
+                textFieldValue = null;
                 break;
             } case PHONE: {
                 userFieldValue = null;
                 groupFieldValue = null;
                 userValue = null;
+                textFieldValue = null;
+                break;
+            } case TEXT_FIELD: {
+                userFieldValue = null;
+                groupFieldValue = null;
+                userValue = null;
+                phoneValue = null;
                 break;
             }
         }
@@ -115,6 +132,7 @@ public class SendSmsFunctionFactory extends AbstractWorkflowPluginFactory implem
         params.put("groupFieldValue", groupFieldValue);
         params.put("userValue", userValue);
         params.put("phoneValue", phoneValue);
+        params.put("textFieldValue", textFieldValue);
         return params;
     }
 }

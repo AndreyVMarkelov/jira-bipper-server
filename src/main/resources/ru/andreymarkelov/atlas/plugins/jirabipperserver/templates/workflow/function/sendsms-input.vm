@@ -9,6 +9,7 @@ $webResourceManager.requireResourcesForContext("jira-bipper-function")
     <td nowrap>
         <input type="hidden" name="userFieldCurrentValue" id="userFieldCurrentValue" value="$!{userFieldValue}"/>
         <input type="hidden" name="groupFieldCurrentValue" id="groupFieldSelection" value="$!{groupFieldValue}"/>
+        <input type="hidden" name="textFieldCurrentValue" id="textFieldCurrentValue" value="$!{textFieldValue}"/>
         <textarea class="textarea" cols="80" rows="4" name="messageText" id="messageText">$!{messageText}</textarea>
         <br/><span class="subText">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.postfunction.messagetext.desc")</span>
     </td>
@@ -21,6 +22,7 @@ $webResourceManager.requireResourcesForContext("jira-bipper-function")
             <option #if($recipientType == "2")selected="selected"#end value="2">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.postfunction.sendto.type.groupfield")</option>
             <option #if($recipientType == "3")selected="selected"#end value="3">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.postfunction.sendto.type.user")</option>
             <option #if($recipientType == "4")selected="selected"#end value="4">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.postfunction.sendto.type.phone")</option>
+            <option #if($recipientType == "5")selected="selected"#end value="5">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.postfunction.sendto.type.textfield")</option>
         </select>
         <br/><span class="subText">$i18n.getText("ru.andreymarkelov.atlas.plugins.jira-bipper-server.postfunction.sendto.desc")</span>
     </td>
@@ -32,5 +34,6 @@ $webResourceManager.requireResourcesForContext("jira-bipper-function")
         <select name="groupFieldValue" id="groupFieldValue" class="select aui-ss-select width250" style="display: none;"></select>
         <input type="text" name="userValue" id="userValue" class="aui-ss" value="$!{userValue}" style="display: none;">
         <input type="text" name="phoneValue" id="phoneValue" class="aui-ss" value="$!{phoneValue}" style="display: none;">
+        <select name="textFieldValue" id="textFieldValue" class="select aui-ss-select width250" style="display: none;"></select>
     </td>
 </tr>

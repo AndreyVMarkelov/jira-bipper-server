@@ -1,14 +1,15 @@
 package ru.andreymarkelov.atlas.plugins.jirabipperserver.manager;
 
-import java.util.Set;
-
 import com.atlassian.jira.issue.Issue;
+
+import java.util.Set;
 
 public interface NumberExtractor {
     String USER_FIELD = "1";
     String GROUP_FIELD = "2";
     String USER = "3";
     String PHONE = "4";
+    String TEXT_FIELD = "5";
 
     String CREATOR_FIELD_CLASS = "com.atlassian.jira.issue.fields.CreatorSystemField";
     String REPORTER_FIELD_CLASS = "com.atlassian.jira.issue.fields.ReporterSystemField";
@@ -19,4 +20,5 @@ public interface NumberExtractor {
     String getUserPhone(String user);
     Set<String> getUserFieldPhones(Issue issue, String field);
     Set<String> getGroupFieldPhones(Issue issue, String field);
+    Set<String> getTextFieldPhones(Issue issue, String field);
 }

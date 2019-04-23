@@ -1,9 +1,5 @@
 package ru.andreymarkelov.atlas.plugins.jirabipperserver.workflow.function;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.workflow.function.issue.AbstractJiraFunctionProvider;
@@ -15,9 +11,14 @@ import ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.MessageFormatter
 import ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor;
 import ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.SenderService;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.GROUP_FIELD;
 import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.PHONE;
+import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.TEXT_FIELD;
 import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.USER;
 import static ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor.USER_FIELD;
 
@@ -62,6 +63,9 @@ public class SendSmsFunction extends AbstractJiraFunctionProvider {
                 if (isNotBlank(phone)) {
                     phones.add(phone);
                 }
+                break;
+            case TEXT_FIELD:
+                phones.addAll(numberExtractor.getTextFieldPhones(issue, (String) args.get("textFieldValue")));
                 break;
         }
 

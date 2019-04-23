@@ -1,9 +1,5 @@
 package ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.impl;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.atlassian.crowd.embedded.api.Group;
 import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.Issue;
@@ -18,8 +14,12 @@ import com.atlassian.jira.user.util.UserManager;
 import ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.ContactManager;
 import ru.andreymarkelov.atlas.plugins.jirabipperserver.manager.NumberExtractor;
 
-import static java.util.Collections.emptySet;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+import static java.util.Collections.emptySet;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class NumberExtractorImpl implements NumberExtractor {
@@ -149,5 +149,19 @@ public class NumberExtractorImpl implements NumberExtractor {
             }
         }
         return phones;
+    }
+
+    @Override
+    public Set<String> getTextFieldPhones(Issue issue, String field) {
+        CustomField customField = customFieldManager.getCustomFieldObject(field);
+        if (customField == null) {
+            return emptySet();
+        }
+
+        Object customFieldValue = issue.getCustomFieldValue(customField);
+        if (customFieldValue == null || customFieldValue.toString().isEmpty()) {
+            return emptySet();
+        }
+        return Collections.singleton(customFieldValue.toString());
     }
 }

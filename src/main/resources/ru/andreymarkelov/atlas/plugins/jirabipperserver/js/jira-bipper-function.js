@@ -6,30 +6,42 @@ AJS.toInit(function () {
                 AJS.$("#groupFieldValue").hide();
                 AJS.$("#userValue").hide();
                 AJS.$("#phoneValue").hide();
+                AJS.$("#textFieldValue").hide();
                 break;
             case "2":
                 AJS.$("#userFieldValue").hide();
                 AJS.$("#groupFieldValue").show();
                 AJS.$("#userValue").hide();
                 AJS.$("#phoneValue").hide();
+                AJS.$("#textFieldValue").hide();
                 break;
             case "3":
                 AJS.$("#userFieldValue").hide();
                 AJS.$("#groupFieldValue").hide();
                 AJS.$("#userValue").show();
                 AJS.$("#phoneValue").hide();
+                AJS.$("#textFieldValue").hide();
                 break;
             case "4":
                 AJS.$("#userFieldValue").hide();
                 AJS.$("#groupFieldValue").hide();
                 AJS.$("#userValue").hide();
                 AJS.$("#phoneValue").show();
+                AJS.$("#textFieldValue").hide();
+                break;
+            case "5":
+                AJS.$("#userFieldValue").hide();
+                AJS.$("#groupFieldValue").hide();
+                AJS.$("#userValue").hide();
+                AJS.$("#phoneValue").hide();
+                AJS.$("#textFieldValue").show();
                 break;
         }
     }
 
     var userField = AJS.$("#userFieldCurrentValue").val();
     var groupField = AJS.$("#groupFieldCurrentValue").val();
+    var textField = AJS.$("#textFieldCurrentValue").val();
 
     var userFieldSelect = AJS.$("#userFieldValue");
     userFieldSelect.append(AJS.$('<option>', {
@@ -63,6 +75,24 @@ AJS.toInit(function () {
                 value: value.key,
                 text: value.value,
                 selected: (value.key === groupField)
+            }));
+        });
+    });
+
+    var textFieldSelect = AJS.$("#textFieldValue");
+    textFieldSelect.append(AJS.$('<option>', {
+        value: '',
+        text: 'Please select...'
+    }));
+    AJS.$.ajax({
+        url: AJS.contextPath() + "/rest/bipper/1.0/postfunction/issuetextfields",
+        dataType: "json"
+    }).done(function(data) {
+        AJS.$.each(data, function(key, value) {
+            textFieldSelect.append(AJS.$('<option>', {
+                value: value.key,
+                text: value.value,
+                selected: (value.key === textField)
             }));
         });
     });
